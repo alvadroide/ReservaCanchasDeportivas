@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Reservar</title>
+  <style>
+    /* Reset básico */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #e3f2fd;
+      color: #1a237e;
+      padding: 30px 20px;
+      min-height: 100vh;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #0d47a1;
+    }
+
+    form {
+      background: white;
+      max-width: 450px;
+      margin: 0 auto;
+      padding: 25px 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(33, 150, 243, 0.2);
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #283593;
+    }
+
+    select, input[type="date"], textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 2px solid #90caf9;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+      resize: vertical;
+    }
+
+    select:focus, input[type="date"]:focus, textarea:focus {
+      outline: none;
+      border-color: #1e88e5;
+      box-shadow: 0 0 6px #64b5f6;
+    }
+
+    textarea {
+      min-height: 80px;
+    }
+
+    h3 {
+      margin-top: 25px;
+      color: #1565c0;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    input[type="checkbox"] {
+      margin-right: 8px;
+      transform: scale(1.2);
+      vertical-align: middle;
+    }
+
+    button[type="submit"] {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px 0;
+      background-color: #1e88e5;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #1565c0;
+    }
+
+    /* Botón volver */
+    .btn-volver {
+      display: block;
+      width: max-content;
+      margin: 20px auto 0 auto;
+      padding: 10px 24px;
+      background-color: #64b5f6;
+      color: #0d47a1;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      text-align: center;
+      transition: background-color 0.3s, color 0.3s;
+      box-shadow: 0 2px 8px rgba(25, 118, 210, 0.3);
+    }
+
+    .btn-volver:hover {
+      background-color: #1565c0;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <h2>Reservar Cancha</h2>
+  <form method="post">
+    {% csrf_token %}
+    <label>Cancha:</label>
+    <select name="cancha_id">
+      {% for cancha in canchas %}
+        <option value="{{ cancha.id_cancha }}">{{ cancha.nombre }}</option>
+      {% endfor %}
+    </select>
+
+    <label>Horario:</label>
+    <select name="horario_id">
+      {% for horario in horarios %}
+        <option value="{{ horario.id_horario }}">{{ horario.hora_inicio }} - {{ horario.hora_termino }}</option>
+      {% endfor %}
+    </select>
+
+    <label>Fecha:</label>
+    <input type="date" name="fecha">
+
+    <label>Observaciones:</label>
+    <textarea name="observaciones"></textarea>
+
+    <h3>Servicios adicionales:</h3>
+    {% for servicio in servicios %}
+      <label>
+        <input type="checkbox" name="servicios" value="{{ servicio.id_servicio }}"> {{ servicio.descripcion }}
+      </label><br>
+    {% endfor %}
+
+    <button type="submit">Reservar</button>
+  </form>
+
+  <a href="{% url 'inicio' %}" class="btn-volver">← Volver al Inicio</a>
+</body>
+</html>

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head><title>Panel Administrativo</title></head>
+<body>
+  <h2>Reservas del sistema</h2>
+  <ul>
+    {% for reserva in reservas %}
+      <li>ID: {{ reserva.id_reserva }} - Usuario: {{ reserva.id_usuario }} - Fecha: {{ reserva.fecha_reserva }}</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registro Usuario</title>
+  <style>
+    body {
+      background-color: #e3f2fd;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #0d47a1;
+      padding: 30px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 25px;
+      font-weight: 700;
+      color: #0d47a1;
+      text-align: center;
+    }
+
+    form {
+      background: white;
+      width: 350px;
+      padding: 25px 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(33, 150, 243, 0.2);
+    }
+
+    form p {
+      margin-bottom: 15px;
+      font-size: 1rem;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      padding: 12px 0;
+      background-color: #1e88e5;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin-top: 10px;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #1565c0;
+    }
+
+    /* Botón volver */
+    .btn-volver {
+      display: inline-block;
+      margin: 20px auto 0 auto;
+      padding: 10px 24px;
+      background-color: #64b5f6;
+      color: #0d47a1;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      text-align: center;
+      transition: background-color 0.3s, color 0.3s;
+      box-shadow: 0 2px 8px rgba(25, 118, 210, 0.3);
+      max-width: 350px;
+    }
+
+    .btn-volver:hover {
+      background-color: #1565c0;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Crear nueva cuenta</h2>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Registrarse</button>
+  </form>
+
+  <a href="{% url 'inicio' %}" class="btn-volver">← Volver al Inicio</a>
+
+</body>
+</html>
